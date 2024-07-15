@@ -38,6 +38,6 @@ function calculateYears(principal, interest, tax, desired) {
       years ++
       sum += ( sum * interest ) - ( sum * interest * tax );
     }
-  
+   
     return years;
 }
