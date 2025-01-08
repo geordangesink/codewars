@@ -6,32 +6,57 @@ You live in the city of Cartesia where all roads are laid out in a perfect grid.
 Note: you will always receive a valid array containing a random assortment of direction letters ('n', 's', 'e', or 'w' only). It will never give you an empty array (that's not a walk, that's standing still!).
 */
 
+// Updated:
 function isValidWalk(walk) {
-    let minutesLeft = 10;
-    let minutesWalked = 0;
-    let index = 0;
-    let northSouth = 0;
-    let eastWest = 0;
-    
-    // walk blocks no longer than minutes left (1 min per block)
-    while ( minutesWalked <= minutesLeft ){
-      
-      try{
-        // walking different direction per block
-        switch ( walk[index] ){
-            case "n": northSouth++; break;
-            case "s": northSouth--; break;
-            case "e": eastWest++; break;
-            case "w": eastWest--; break;
-        }
-        minutesWalked++;
-        index++;
-      }
-      catch{
-        // if the walk is taken multiple times
-        index = 0;
-      }
-    }
-    // returning at same position and taking exactly 10 minutes
-    return (northSouth === 0 && eastWest === 0 && walk.length >= 10 );
+  if (walk.length !== 10) return false;
+  else {
+    let ns = 0; // positive is north, negative south
+    let we = 0; // positive is west, negative east
+
+    walk.forEach((turn) => {
+      turn === "n" && ns++;
+      turn === "s" && ns--;
+      turn === "w" && we++;
+      turn === "e" && we--;
+    });
+
+    return !ns && !we;
   }
+}
+
+// Old:
+function isValidWalk(walk) {
+  let minutesLeft = 10;
+  let minutesWalked = 0;
+  let index = 0;
+  let northSouth = 0;
+  let eastWest = 0;
+
+  // walk blocks no longer than minutes left (1 min per block)
+  while (minutesWalked <= minutesLeft) {
+    try {
+      // walking different direction per block
+      switch (walk[index]) {
+        case "n":
+          northSouth++;
+          break;
+        case "s":
+          northSouth--;
+          break;
+        case "e":
+          eastWest++;
+          break;
+        case "w":
+          eastWest--;
+          break;
+      }
+      minutesWalked++;
+      index++;
+    } catch {
+      // if the walk is taken multiple times
+      index = 0;
+    }
+  }
+  // returning at same position and taking exactly 10 minutes
+  return northSouth === 0 && eastWest === 0 && walk.length >= 10;
+}
