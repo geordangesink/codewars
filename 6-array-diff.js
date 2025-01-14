@@ -13,5 +13,10 @@ arrayDiff([1,2,2,2,3],[2]) == [1,3]
 */
 
 function arrayDiff(a, b) {
-    return a.filter(n => !b.includes(n));
+  return a.filter((n) => !b.includes(n));
+}
+
+// repeated after 7 months
+function arrayDiff(a, b) {
+  return a.filter((val) => !b.includes(val));
 }
